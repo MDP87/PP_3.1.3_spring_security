@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Update user</title>
+</head>
+<body>
+<div>
+  <form th:method="PATCH" th:action="@{/admin/user/{id}(id=${user.getId()})}" th:object="${user}">
+    <input th:field="*{username}" type="text" id="name" placeholder="name"/>
+    <br/>
+    <input th:field="*{lastName}" type="text" id="lastName" placeholder="lastName"/>
+    <br/>
+    <input th:field="*{email}" type="text" id="email" placeholder="email "/>
+    <br/>
+    <!--    <input th:field="*{password}" type="password" id="password" placeholder="password"/>-->
+    <br/>
+    <input th:field="*{roles}" type="checkbox" name="roles"
+           th:each="role : ${roles}"
+           th:text="${role.name}"
+           th:value="${role.id}"
+    />
+    <br/>
+    <input type="submit" value="Update user">
+</div>
+</form>
+</div>
+<form th:method="GET" th:action="@{/admin}">
+  <p><input type="submit" value="Back to admin page" name="Back to admin page"></p>
+</form>
+
+</body>
+</html>

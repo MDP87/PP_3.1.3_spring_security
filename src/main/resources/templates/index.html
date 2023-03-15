@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>Welcome to main page</title>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
-
+<div>
+    <th:block th:each="msg : ${messages}">
+        <h1 th:text="${msg}"></h1>
+    </th:block>
+</div>
+<div>
+    <h3>Press button to see something</h3>
+</div>
+<form th:method="GET" th:action="@{/admin}">
+    <p><input type="submit" value="Go to admin page" name="Go to admin page"></p>
+</form>
+<div>
+    <h3>Press button to add new user</h3>
+</div>
+</hr>
+<form th:method="GET" th:action="@{/user}">
+    <p><input type="submit" value="Go to user page" name="Go to user page"></p>
+</form>
+<form th:method="GET" th:action="@{/register}">
+    <p><input type="submit" value="Registration new user" name="Registration new user"></p>
+</form>
 
 </body>
 </html>
+

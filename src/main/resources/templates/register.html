@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+<h2>Welcome to registration page!</h2>
+
+<form th:method="POST" th:action="@{/admin/register}" th:object="${user}">
+  <input th:field="*{username}" type="text" id="name" placeholder="name"/>
+  <br/>
+  <input th:field="*{lastName}" type="text" id="lastName" placeholder="lastName"/>
+  <br/>
+  <input th:field="*{email}" type="text" id="email" placeholder="email "/>
+  <br/>
+  <input th:field="*{password}" type="password" id="password" placeholder="password"/>
+  <br/>
+  <input th:field="*{roles}" type="checkbox" name="roles"
+         th:each="role : ${roles}"
+         th:text="${role.name}"
+         th:value="${role.id}"
+  />
+  <br/>
+
+  <input type="submit" value="Sign up">
+</form>
+</body>
+</html>

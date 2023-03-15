@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Show all users</title>
+</head>
+<body>
+<h1>All users </h1>
+<div>
+  <form th:if="${users.isEmpty()}" th:method="GET" th:action="@{/admin/register}">
+    <p><input type="submit" value="Add new user" name="Add new user"></p>
+  </form>
+  <table border="1"
+         th:if="${!users.isEmpty()} ">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <!--            <th>Password</th>-->
+      <th>Roles</th>
+      <th>Action</th>
+    </tr>
+    <tr data-th-each="user : ${users}">
+      <td th:text="${user.getId()}"></td>
+      <td th:text="${user.getUsername()}"></td>
+      <td th:text="${user.getEmail()}"></td>
+      <!--            <td th:text="${user.getPassword()}"></td>-->
+      <td th:each="roles : ${user.getAuthorities()}"
+          th:text=" ${#strings.toString(roles.getAuthority())}"></td>
+      <td>
+        <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
+          <p><input type="submit" value="Delete user" name="Delete user"></p>
+        </form>
+        <form th:method="GET" th:action="@{/admin/update/{id}(id=${user.getId()})}">
+          <p><input type="submit" value="Update user" name="Update user"></p>
+        </form>
+      </td>
+    </tr>
+  </table>
+  <form th:method="GET" th:action="@{/login/index}">
+    <p><input type="submit" value="Back to main page" name="Back to main page"></p>
+  </form>
+
+  <form th:if="${!users.isEmpty()}" th:method="GET" th:action="@{/admin/register}">
+    <p><input type="submit" value="Add new user" name="Add new user"></p>
+  </form>
+
+  <form th:method="GET" th:action="@{/user}">
+    <p><input type="submit" value="Go to user page" name="Go to user page"></p>
+  </form>
+  <br/>
+  <form th:method="POST" th:action="@{/login/logout}">
+    <p>
+      <input type="submit" th:value="Logout" name="Logout">
+    </p>
+  </form>
+</div>
+
+
+</html>
